@@ -1,0 +1,139 @@
+:root {
+  --bg: #08090c;
+  --fg: #f1efea;
+  --text: #c9c8c4;
+  --muted: #8d8f98;
+  --faint: #5a5c66;
+  --accent: #c8b28a;
+  --line: rgba(255, 255, 255, 0.08);
+  --pad: clamp(1.5rem, 5vw, 3rem);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; color-scheme: dark; background: var(--bg); }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  padding: 0 max(var(--pad), env(safe-area-inset-right)) 0 max(var(--pad), env(safe-area-inset-left));
+  background:
+    radial-gradient(60rem 28rem at 50% -8%, rgba(200, 178, 138, 0.07), transparent 70%),
+    var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection { background: rgba(200, 178, 138, 0.28); }
+
+a { color: var(--accent); text-underline-offset: 3px; text-decoration-color: rgba(200, 178, 138, 0.4); }
+a:hover, a:focus-visible { text-decoration-color: var(--accent); }
+
+/* ---- header / footer (shared) ---- */
+.top {
+  padding: var(--pad) 0 0;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.top a { color: inherit; text-decoration: none; }
+.top a:hover { color: var(--fg); }
+.mark::before {
+  content: "";
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  margin-right: 0.9em;
+  border-radius: 50%;
+  background: var(--accent);
+  vertical-align: 0.12em;
+}
+
+footer {
+  padding: 3rem 0 max(var(--pad), env(safe-area-inset-bottom));
+  font-size: 0.8125rem;
+  color: var(--faint);
+}
+footer a { color: var(--muted); text-decoration: none; border-bottom: 1px solid var(--line); }
+footer a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+
+/* ---- centred pages (apps home, 404) ---- */
+body.center { text-align: center; }
+body.center main { align-self: center; justify-self: center; max-width: 40rem; padding: 3rem 0; }
+body.center h1 {
+  margin: 0;
+  font-size: clamp(1.75rem, 5vw, 2.75rem);
+  font-weight: 300;
+  line-height: 1.2;
+  letter-spacing: -0.03em;
+  color: var(--fg);
+  text-wrap: balance;
+}
+body.center .lead { margin: 1.25rem 0 0; color: var(--muted); }
+body.center footer { display: flex; flex-direction: column; align-items: center; gap: 0.4rem; padding-top: 0; }
+
+/* ---- document pages (privacy policy etc.) ---- */
+main.doc { width: 100%; max-width: 42rem; margin: 0 auto; padding: 4rem 0 2rem; }
+.doc .eyebrow {
+  margin: 0 0 1rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.doc h1 {
+  margin: 0;
+  font-size: clamp(1.9rem, 5vw, 2.75rem);
+  font-weight: 300;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  color: var(--fg);
+  text-wrap: balance;
+}
+.doc .meta { margin: 1rem 0 0; font-size: 0.875rem; color: var(--muted); }
+.doc h2 {
+  margin: 2.75rem 0 0.5rem;
+  padding-top: 1.75rem;
+  border-top: 1px solid var(--line);
+  font-size: 1.125rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--fg);
+}
+.doc p, .doc ul { margin: 0.75rem 0 0; }
+.doc ul { padding-left: 1.2rem; }
+.doc li { margin: 0.35rem 0; }
+.doc li::marker { color: var(--faint); }
+.doc strong { color: var(--fg); font-weight: 500; }
+.doc .intro { margin-top: 2rem; }
+.doc code {
+  padding: 0.1em 0.4em;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--fg);
+  font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace;
+  font-size: 0.9em;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 480px) {
+  .top { font-size: 0.6875rem; letter-spacing: 0.2em; }
+  main.doc { padding-top: 2.5rem; }
+  .doc h2 { margin-top: 2.25rem; }
+}
+
+@media print {
+  body { background: #fff; color: #000; }
+  .top, footer { display: none; }
+  .doc h1, .doc h2, .doc strong { color: #000; }
+  .doc .meta { color: #333; }
+}
